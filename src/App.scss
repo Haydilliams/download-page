@@ -4,7 +4,7 @@
     background-color: #c1a0c2;
     display: grid;
     grid-template-columns: repeat(1, auto);
-    grid-gap: 40px;
+    grid-gap: 50px;
     padding: 20px;
     margin: 10px;
     
@@ -15,5 +15,28 @@
     width: 100%;
     padding-top: 100%; /* 1:1 Aspect Ratio */
     margin: auto; 
-    justify-items: center;
   }
+
+  @media screen and (min-width: 568px) {
+      .wrapper {
+        grid-template-columns: repeat(2, auto);
+        grid-gap: 20px;
+        grid-row-gap: 50px;
+      }
+  }
+
+  @media screen and (min-width: 768px) {
+    .wrapper {
+      grid-template-columns: repeat(3, auto);
+      grid-gap: 20px;
+      grid-row-gap: 50px;
+    }
+
+    @media screen and (min-width: 1024px) {
+        .wrapper {
+          grid-template-columns: repeat(4, auto);
+          grid-gap: 30px;
+          grid-row-gap: 50px;
+        }
+    }
+}
