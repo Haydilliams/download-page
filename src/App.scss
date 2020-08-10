@@ -6,6 +6,33 @@
     background-color: #ebc6ee;
 }
 
+.photo-button-holder {
+  position: absolute;
+  height: 22%;
+  left: 12%;
+  right: 12%;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.photo-button {
+  visibility: hidden;
+  color: rgb(51, 51, 51);
+  background-color: rgba(255, 254, 254, 0.3);
+  border-color: rgba(0, 0, 0, 0.5);
+  border-width: thin;
+  border-style: solid;
+  border-radius: 0px;
+  font-size: medium;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
 .header > div {
     margin: auto;
 }
@@ -17,6 +44,25 @@
     padding: 20px;
     margin: 10px;
     
+  }
+
+  .download-wrapper {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 10px;
+    padding: 10px;
+    margin: 50px;
+    
+  }
+
+  .download-photo-block {
+    background-color: green;
+    width: 100%;
+  }
+
+  .download-text-block {
+    background-color: red;
+    width: 100%
   }
 
   .photo-wrapper {
@@ -49,8 +95,14 @@
     right: 0;
   }
 
+  .photo-background:hover > .photo-button-holder > .photo-button {
+    animation-duration: .4s;
+    animation-name: hover-anim-button;
+    animation-fill-mode: forwards
+  }
+
   .photo-background:hover {
-    animation-duration: .5s;
+    animation-duration: .4s;
     animation-name: hover-anim;
     animation-fill-mode: forwards
   }
@@ -60,9 +112,22 @@
         opacity: 1;
       }
       to {
-        opacity: .5;
+        opacity: .8;
       }
   }
+
+  @keyframes hover-anim-button {
+    from {
+      visibility: hidden;
+      opacity: 0;
+    }
+    to {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  // Media Screens for the grid on the main page
 
   @media screen and (min-width: 568px) {
       .wrapper {
@@ -78,12 +143,22 @@
       grid-gap: 20px;
       grid-row-gap: 50px;
     }
+  }
 
-    @media screen and (min-width: 1024px) {
-        .wrapper {
-          grid-template-columns: repeat(4, auto);
-          grid-gap: 30px;
-          grid-row-gap: 50px;
-        }
+  @media screen and (min-width: 1024px) {
+    .wrapper {
+      grid-template-columns: repeat(4, auto);
+      grid-gap: 30px;
+      grid-row-gap: 50px;
     }
-}
+  }
+
+  // Media Screens for the download page
+
+  @media screen and (max-width: 768px) {
+    .download-wrapper  {
+      grid-template-columns: repeat(1, auto);
+    }
+  }
+
+    

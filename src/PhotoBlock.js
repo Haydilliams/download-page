@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import './App.scss';
+import Button from 'react-bootstrap/Button';
+import { NavLink } from 'react-router-dom';
+import Download from './Download.js'
 
 class PhotoBlock extends Component {
     constructor(props) {
@@ -19,16 +22,20 @@ class PhotoBlock extends Component {
         }
 
         const images = importAll(require.context('./images', false, /\.(jpe?g)$/));
+        var imageName = this.props.imageName;
         var imagePath = this.props.imageName + "500.jpg";
         var readableImageName = this.props.imageName.replace(/_/g, " ");
 
         return (
             <div className='photo-wrapper'>
-                <div className='photo-background'>
-                    <img src={images[imagePath]} alt={readableImageName} /> 
-                </div>
-                <div className ='photo-text'>{readableImageName}</div>
-                
+                <NavLink to={'/download/' + imageName} className='photo-background' render={(props) => <Download {...props} />}>
+                    <img src={images[imagePath]} alt={readableImageName} />
+                    <div className='photo-button-holder'>
+                        <Button className='photo-button' variant="outline-secondary">Download</Button>{' '}
+                    </div>
+                </NavLink>
+                <div className='photo-text'>{readableImageName}</div>
+
             </div>
         );
     }
