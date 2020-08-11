@@ -3,7 +3,7 @@ import './App.css';
 import './App.scss';
 import Button from 'react-bootstrap/Button';
 import { NavLink } from 'react-router-dom';
-import Download from './Download.js'
+import Download from './pages/Download.js'
 
 class PhotoBlock extends Component {
     constructor(props) {
@@ -28,7 +28,7 @@ class PhotoBlock extends Component {
 
         return (
             <div className='photo-wrapper'>
-                <NavLink to={'/download/' + imageName} className='photo-background' render={(props) => <Download {...props} />}>
+                <NavLink to={'/download/' + imageName} className='photo-background' render={<Download props={imageName} />}>
                     <img src={images[imagePath]} alt={readableImageName} />
                     <div className='photo-button-holder'>
                         <Button className='photo-button' variant="outline-secondary">Download</Button>{' '}

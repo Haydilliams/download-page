@@ -3,13 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { HashRouter, Route } from 'react-router-dom';
-import Download from './Download';
+import { Switch, HashRouter, Route } from 'react-router-dom';
+import Download from './pages/Download';
+import NotFoundPage from './pages/NotFoundPage';
 
 ReactDOM.render((
   <HashRouter>
-    <Route exact path="/" component={App} />
-    <Route exact path="/download/:imageName" render={(props) => <Download {...props} />}/>
+    <Switch>
+      <Route exact path="/" component={App} />
+      <Route exact path="/download/:imageName" render={(props) => <Download {...props} />} />
+      <Route component={NotFoundPage} />
+    </Switch>
+    
   </HashRouter>
 ), document.getElementById('root'))
 
