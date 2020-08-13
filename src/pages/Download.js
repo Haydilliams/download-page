@@ -1,47 +1,44 @@
-import React, { Component } from 'react';
-import { NavLink, Redirect} from 'react-router-dom';
+import React, { useState } from 'react';
+import { NavLink, Redirect } from 'react-router-dom';
 import '../App.css';
 import '../App.scss';
-import { render } from 'react-dom';
+import PaymentForm from "../PaymentForm";
 
-class Download extends Component {
+export default function Download(props) {
 
-    render() {
-        // Rather than importing every single image, this is a nice one compact solution.
-        // kudos to: https://stackoverflow.com/questions/42118296/dynamically-import-images-from-a-directory-using-webpack
+    // Rather than importing every single image, this is a nice one compact solution.
+    // kudos to: https://stackoverflow.com/questions/42118296/dynamically-import-images-from-a-directory-using-webpack
 
-        function importAll(r) {
-            let images = {};
-            r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
-            return images;
-        }
+    function importAll(r) {
+        let images = {};
+        r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+        return images;
+    }
 
-        const images = importAll(require.context('../images', false, /\.(jpe?g)$/));
-        var imageName = this.props.match.params.imageName
-        var imagePath = imageName + "500.jpg";
-        var readableImageName = imageName.replace(/_/g, " ");
+    const images = importAll(require.context('../images', false, /\.(jpe?g)$/));
+    var imageName = props.match.params.imageName
+    var imagePath = imageName + "500.jpg";
+    var readableImageName = imageName.replace(/_/g, " ");
 
-        if (imagePath in images) {
-            return (
-                <div className="App">
-                    <div className="header">
-                        <NavLink to='/'>{"<--"} Back to All Images</NavLink>
-                    </div>
-                    <div className='download-wrapper'>
-                        <img className='download-photo-block' src={images[imagePath]} alt={readableImageName}/>
-                        <div className='download-text-block'>
-                            A High-resolution download of {readableImageName}. Simply pay as little or as much as you want.
-                        </div>
-                    </div>
+    if (imagePath in images) {
+        return (
+            <div className="App">
+                <div className="header">
+                    <NavLink to='/'>{"<--"} Back to All Images</NavLink>
                 </div>
-            );
-        } else {
-            return (
-                <Redirect to={{ pathname: "/404", state: {} }}/>
-            );
-        }
-        
+                <div className='download-wrapper'>
+                    <img className='download-photo-block' src={images[imagePath]} alt={readableImageName} />
+                    <div className='download-text-block'>
+                        A High-resolution download of {readableImageName}. Simply pay as little or as much as you want.
+                    </div>
+                    <PaymentForm></PaymentForm>
+                </div>
+            </div>
+        );
+    } else {
+        return (
+            <Redirect to={{ pathname: "/404", state: {} }} />
+        );
     }
 }
-export default Download
 
