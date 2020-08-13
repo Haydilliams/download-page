@@ -8,6 +8,7 @@ export default function PaymentForm(props) {
     const [isPaying, setIsPaying] = useState(true);
     const [buttonClicked, setButtonClicked] = useState(false);
     const [currentPrice, setCurrentPrice] = useState(5);
+    const test = process.env.REACT_APP_TEST;
 
     function handlePriceChange(event) {
         setCurrentPrice(event.target.value);
@@ -19,7 +20,7 @@ export default function PaymentForm(props) {
     });
 
     function buttonBehavior() {
-        if (props.currentPrice == 0) {
+        if (currentPrice == 0) {
             return 'Download';
         }
         else {
@@ -28,10 +29,13 @@ export default function PaymentForm(props) {
     };
 
     return (
-        <div>
+        <div className='payment-form'>
             <CurrencyInput value={currentPrice} onChangeEvent={handlePriceChange}></CurrencyInput>
             <Button onClick={() => setButtonClicked(true)}>{buttonBehavior()}</Button>
-            {isPaying && buttonClicked && <PaypalButtons></PaypalButtons>}
+            {isPaying && buttonClicked &&
+                <div className="paypal-button-container">
+                    <PaypalButtons price={currentPrice}></PaypalButtons>
+                </div>}
             {!isPaying && buttonClicked && <h1>DOWNLOAD NOW</h1>}
         </div>
     );

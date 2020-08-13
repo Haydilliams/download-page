@@ -28,10 +28,12 @@ export default function Download(props) {
                 </div>
                 <div className='download-wrapper'>
                     <img className='download-photo-block' src={images[imagePath]} alt={readableImageName} />
-                    <div className='download-text-block'>
-                        A High-resolution download of {readableImageName}. Simply pay as little or as much as you want.
+                    <div className='text-and-payment-block'>
+                        <div className='download-text-block'>
+                            A High-resolution download of {readableImageName}. Simply pay as little or as much as you want.
                     </div>
-                    <PaymentForm></PaymentForm>
+                        <PaymentForm></PaymentForm>
+                    </div>
                 </div>
             </div>
         );

@@ -48,16 +48,36 @@
 
   .download-wrapper {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 40% 60%;
     grid-gap: 10px;
     padding: 10px;
     margin: 50px;
     
   }
 
-  .download-photo-block {
-    background-color: green;
+  .paypal-button-container {
+    background-color: blue;
+    position: absolute;
+    bottom: 0;
     width: 100%;
+  }
+
+  .payment-form {
+    position: relative;
+    background-color: green;
+    bottom:0;
+  }
+
+  .download-photo-block {
+    bottom: 0;
+    background-color: purple;
+    width: 100%;
+  }
+
+  .text-and-payment-block {
+    display: grid;
+    grid-template-rows: 20% auto;
+    grid-gap: 10px;
   }
 
   .download-text-block {
@@ -78,7 +98,6 @@
     width: 100%;
     padding-top: 100%; /* 1:1 Aspect Ratio */
     margin: auto;
-    background-color: rgb(204, 255, 252);
   }
 
   .photo-background > img {
