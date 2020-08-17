@@ -7,30 +7,41 @@
 }
 
 .photo-button-holder {
+  visibility: hidden;
   position: absolute;
   height: 22%;
   left: 12%;
   right: 12%;
+  margin: auto;
+  top: 100%;
+  transition: top 0.2s, visiblity 0.2s, bottom 0.2s;
+  z-index: 2;
+}
+
+.photo-background:hover > .photo-button-holder {
   top: 0;
   bottom: 0;
-  margin: auto;
+  visibility: visible;
 }
 
 .photo-button {
   opacity: 0;
-  color: rgb(51, 51, 51);
-  background-color: rgba(255, 254, 254, 0.3);
-  border-color: rgba(0, 0, 0, 0.5);
-  border-width: thin;
+  color: white;
+  background-color: rgba(180, 180, 180, 0.3);
+  border-color: white;
+  border-width: 2px;
   border-style: solid;
-  border-radius: 0px;
-  font-size: medium;
+  border-radius: 8px;
+  font-size: 2.5vw;
+  font-weight: 500;
   position: absolute;
   width: 100%;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
+  animation-name: hover-anim-button-reverse;
+  animation-duration: 0.1s;
 }
 
 .header > * {
@@ -104,6 +115,22 @@
   width: 100%;
 }
 
+.photo-background-slide {
+  background-color: rgb(255, 231, 246);
+  opacity: 0;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 0%;
+  bottom: 0;
+  transition: height 0.25s, opacity 0.25s;
+}
+
+.photo-background:hover > .photo-background-slide {
+  height: 100%;
+  opacity: 0.4;
+}
+
 .photo-text {
   position: absolute;
   top: 100%;
@@ -111,15 +138,10 @@
   right: 0;
 }
 
+// On block hover, animate button
 .photo-background:hover > .photo-button-holder > .photo-button {
-  animation-duration: 0.4s;
+  animation-duration: 0.2s;
   animation-name: hover-anim-button;
-  animation-fill-mode: forwards;
-}
-
-.photo-background:hover {
-  animation-duration: 0.4s;
-  animation-name: hover-anim;
   animation-fill-mode: forwards;
 }
 
@@ -138,6 +160,15 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes hover-anim-button-reverse {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 

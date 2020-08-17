@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import './App.scss';
 import PhotoBlock from './PhotoBlock';
-require('dotenv').config();
 
 function App() {
   return (

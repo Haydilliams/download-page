@@ -29,6 +29,7 @@ class PhotoBlock extends Component {
         return (
             <div className='photo-wrapper'>
                 <NavLink to={'/download/' + imageName} className='photo-background' render={<Download props={imageName} />}>
+                    <div className="photo-background-slide"></div>
                     <img src={images[imagePath]} alt={readableImageName} />
                     <div className='photo-button-holder'>
                         <Button className='photo-button' variant="outline-secondary">Download</Button>{' '}
