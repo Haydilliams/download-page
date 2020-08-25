@@ -32,7 +32,7 @@ class PhotoBlock extends Component {
                     <div className="photo-background-slide"></div>
                     <img src={images[imagePath]} alt={readableImageName} />
                     <div className='photo-button-holder'>
-                        <Button className='photo-button' variant="outline-secondary">Download</Button>{' '}
+                        <div className='photo-button-text'>Download</div>
                     </div>
                 </NavLink>
                 <div className='photo-text'>{readableImageName}</div>

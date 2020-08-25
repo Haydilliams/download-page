@@ -7,41 +7,42 @@
 }
 
 .photo-button-holder {
-  visibility: hidden;
   position: absolute;
-  height: 22%;
+  opacity: 0;
+  visibility: hidden;
+  height: 20%;
   left: 12%;
   right: 12%;
-  margin: auto;
   top: 100%;
-  transition: top 0.2s, visiblity 0.2s, bottom 0.2s;
+  margin: auto;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  transition: transform 0.2s, visibility 0.05s, opacity 0.2s;
   z-index: 2;
 }
 
 .photo-background:hover > .photo-button-holder {
-  top: 0;
-  bottom: 0;
+  transform: translateY(-300%);
   visibility: visible;
+  opacity: 1;
 }
 
-.photo-button {
-  opacity: 0;
+.photo-button-text {
   color: white;
-  background-color: rgba(180, 180, 180, 0.3);
-  border-color: white;
-  border-width: 2px;
-  border-style: solid;
-  border-radius: 8px;
-  font-size: 2.5vw;
+  background-color: rgba(180, 180, 180, 0);
+  font-size: 8vw;
   font-weight: 500;
   position: absolute;
-  width: 100%;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
   left: 0;
   right: 0;
-  top: 0;
-  bottom: 0;
-  animation-name: hover-anim-button-reverse;
-  animation-duration: 0.1s;
+  transition: color 0.2s;
+}
+
+.photo-button-text:hover {
+  color: rgb(208, 220, 255);
 }
 
 .header > * {
@@ -51,47 +52,9 @@
 .wrapper {
   display: grid;
   grid-template-columns: repeat(1, auto);
-  grid-gap: 50px;
+  grid-gap: 30px;
   padding: 20px;
-  margin: 10px;
-}
-
-.download-wrapper {
-  display: grid;
-  grid-template-columns: 40% 60%;
-  grid-gap: 10px;
-  padding: 10px;
-  margin: 50px;
-}
-
-.paypal-button-container {
-  background-color: blue;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
-
-.payment-form {
-  position: relative;
-  background-color: green;
-  bottom: 0;
-}
-
-.download-photo-block {
-  bottom: 0;
-  background-color: purple;
-  width: 100%;
-}
-
-.text-and-payment-block {
-  display: grid;
-  grid-template-rows: 20% auto;
-  grid-gap: 10px;
-}
-
-.download-text-block {
-  background-color: red;
-  width: 100%;
+  margin: 30px;
 }
 
 .photo-wrapper {
@@ -121,14 +84,16 @@
   position: absolute;
   z-index: 1;
   width: 100%;
-  height: 0%;
+  height: 100%;
+  transform-origin: bottom center;
+  transform: scaleY(0);
   bottom: 0;
-  transition: height 0.25s, opacity 0.25s;
+  transition: transform 0.25s, opacity 0.25s;
 }
 
 .photo-background:hover > .photo-background-slide {
-  height: 100%;
-  opacity: 0.4;
+  transform: scaleY(1);
+  opacity: 0.3;
 }
 
 .photo-text {
@@ -138,70 +103,119 @@
   right: 0;
 }
 
-// On block hover, animate button
-.photo-background:hover > .photo-button-holder > .photo-button {
-  animation-duration: 0.2s;
-  animation-name: hover-anim-button;
-  animation-fill-mode: forwards;
+.download-wrapper {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-gap: 10px;
+  margin: 40px;
 }
 
-@keyframes hover-anim {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0.8;
-  }
+.download-photo-block {
+  background-color: brown;
 }
 
-@keyframes hover-anim-button {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.download-photo-block > img {
+  display: block;
+  margin: auto;
+  width: 100%;
 }
 
-@keyframes hover-anim-button-reverse {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+.text-and-payment-block {
+  background-color: blueviolet;
+  text-align: left;
+  display: grid;
+  height: 100%;
+  grid-template-rows: auto auto auto;
+  grid-gap: 10px;
+}
+
+.download-text-block {
+  background-color: red;
+  width: 100%;
+  margin: auto;
+}
+
+.paypal-button-container {
+  background-color: blue;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.paypal-button-container2 {
+  background-color: rgb(255, 0, 119);
+  left: 0;
+  right: 0;
+}
+
+.payment-form {
+  display: flex;
+  flex-direction: column;
+  background-color: green;
+}
+
+.currency-input {
+  width: 70%;
+  border-radius: 6px;
+  border-width: 3px;
+  border-style: solid;
+  font-size: 3vw;
+}
+
+.payment-button {
+  display: inline-block;
+  width: 25%;
 }
 
 // Media Screens for the grid on the main page
 
 @media screen and (min-width: 568px) {
+  .photo-button-text {
+    font-size: 5vw;
+  }
   .wrapper {
     grid-template-columns: repeat(2, auto);
-    grid-gap: 20px;
     grid-row-gap: 50px;
   }
 }
 
 @media screen and (min-width: 768px) {
+  .photo-button-text {
+    font-size: 3.5vw;
+  }
   .wrapper {
     grid-template-columns: repeat(3, auto);
-    grid-gap: 20px;
     grid-row-gap: 50px;
+    margin: 40px;
   }
 }
 
 @media screen and (min-width: 1024px) {
+  .photo-button-text {
+    font-size: 2.7vw;
+  }
   .wrapper {
     grid-template-columns: repeat(4, auto);
-    grid-gap: 30px;
     grid-row-gap: 50px;
+    margin: 50px;
   }
 }
 
 // Media Screens for the download page
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 768px) {
+  .paypal-button-container {
+    bottom: 0;
+  }
   .download-wrapper {
-    grid-template-columns: repeat(1, auto);
+    grid-template-columns: 50% 50%;
+    padding-top: 40px;
+    margin: 30px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .download-wrapper {
+    grid-template-columns: 40% 60%;
   }
 }

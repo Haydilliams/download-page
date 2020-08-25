@@ -27,11 +27,12 @@ export default function Download(props) {
                     <NavLink to='/'>{"<--"} Back to All Images</NavLink>
                 </div>
                 <div className='download-wrapper'>
-                    <img className='download-photo-block' src={images[imagePath]} alt={readableImageName} />
+                    <div className='download-photo-block'><img src={images[imagePath]} alt={readableImageName} /></div>
                     <div className='text-and-payment-block'>
                         <div className='download-text-block'>
-                            A High-resolution download of {readableImageName}. Simply pay as little or as much as you want.
-                    </div>
+                            A High-resolution download of {readableImageName}. Simply pay as little or as
+                             much as you want: whatever you feel is right.
+                        </div>
                         <PaymentForm></PaymentForm>
                     </div>
                 </div>
