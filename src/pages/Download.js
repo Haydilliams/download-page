@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 import '../App.css';
 import '../App.scss';
 import PaymentForm from "../PaymentForm";
+import UserForm from '../UserForm';
 
 export default function Download(props) {
 
@@ -13,6 +14,12 @@ export default function Download(props) {
         let images = {};
         r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
         return images;
+    }
+
+    function callAPITest() {
+        fetch("http://localhost:9000/testAPI")
+        .then(res => res.text())
+        .then(res => alert({ apiResponse: res }));
     }
 
     const images = importAll(require.context('../images', false, /\.(jpe?g)$/));
@@ -36,6 +43,7 @@ export default function Download(props) {
                         <PaymentForm></PaymentForm>
                     </div>
                 </div>
+                <UserForm></UserForm>
             </div>
         );
     } else {

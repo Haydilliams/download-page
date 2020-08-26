@@ -30,13 +30,18 @@ export default function PaymentForm(props) {
 
     return (
         <div className='payment-form'>
-            <CurrencyInput value={currentPrice} onChangeEvent={handlePriceChange}></CurrencyInput>
-            <Button onClick={() => setButtonClicked(true)}>{buttonBehavior()}</Button>
-            {isPaying && buttonClicked &&
-                <div className="paypal-button-container">
-                    <PaypalButtons price={currentPrice}></PaypalButtons>
-                </div>}
-            {!isPaying && buttonClicked && <h1>DOWNLOAD NOW</h1>}
+            <div className="currency-input-and-button">
+                <CurrencyInput className="currency-input" value={currentPrice} onChangeEvent={handlePriceChange}></CurrencyInput>
+                <Button className="payment-button" onClick={() => setButtonClicked(true)}>{buttonBehavior()}</Button>
+
+            </div>
+            <div className="paypal-button-container">
+                <div> {isPaying && buttonClicked &&
+                    <div className="paypal-button-container2">
+                        <PaypalButtons price={currentPrice}></PaypalButtons>
+                    </div>}
+                    {!isPaying && buttonClicked && <h1>DOWNLOAD NOW</h1>}</div>
+            </div>
         </div>
     );
 }

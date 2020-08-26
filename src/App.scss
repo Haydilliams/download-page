@@ -135,6 +135,11 @@
   margin: auto;
 }
 
+.test-holder {
+  width: 30%;
+  margin: auto;
+}
+
 .paypal-button-container {
   background-color: blue;
   left: 0;
@@ -208,14 +213,8 @@
     bottom: 0;
   }
   .download-wrapper {
-    grid-template-columns: 50% 50%;
-    padding-top: 40px;
-    margin: 30px;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .download-wrapper {
     grid-template-columns: 40% 60%;
+    padding-top: 40px;
+    margin: 40px;
   }
 }
