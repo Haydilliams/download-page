@@ -153,6 +153,30 @@
   right: 0;
 }
 
+.free-form-holder {
+  margin: auto;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+}
+
+.MuiButton-submit {
+  color: rgba(255, 124, 124, 0.87);
+  background-color: #90caf9;
+}
+
+.field-holder{
+  padding: 5px;
+}
+
+.free-form {
+  margin: auto;
+  display: flex;
+  height: 100%;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
 .payment-form {
   display: flex;
   flex-direction: column;

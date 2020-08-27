@@ -1,95 +1,99 @@
-import React, { Component} from 'react';
-import Button from 'react-bootstrap/esm/Button';
-import { withStyles } from '@material-ui/core/styles';
+import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import axios from 'axios';
+import './App.scss';
 
-const styles = theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
+        '& .MuiTextField-root': {
+            margin: theme.spacing(1),
+            width: 250,
+        },
+    },
+    button: {
         margin: theme.spacing(1),
-        width: '15ch'
+        background: '#90caf9',
+        color: 'white',
+        height: 48,
+        padding: '0 40px'
     }
-});
+}));
 
-class FreeDownloadForm extends Component {
+export default function FreeDownloadForm() {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            firstName: '',
-            firstNameError: false,
-            lastName: '',
-            lastNameError: false,
-            email: '',
-            emailError: false
-        };
+    const classes = useStyles();
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [firstNameError, setFirstNameError] = useState(false);
+    const [lastNameError, setLastNameError] = useState(false);
+    const [emailError, setEmailError] = useState(false);
+
+    const nameErrorMessage = "Cannot be empty";
+    const emailErrorMessage = "Must be valid email";
+
+    function handleFirstNameChange(event) {
+        setFirstName(event.target.value)
     }
 
-    handleFirstNameChange = (event) => {
-        this.setState({ firstName: event.target.value })
-    }
-
-    handleLastNameChange = (event) => {
-        this.setState({ lastName: event.target.value })
+    function handleLastNameChange(event) {
+        setLastName(event.target.value);
     }
 
     // kudos to https://www.w3resource.com/javascript/form/email-validation.php
-    validateEmail = (email) => {
+    function validateEmail(email) {
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
             return (true)
         }
         return (false)
     }
 
-    handleEmailChange = (event) => {
-        this.setState({ email: event.target.value })
+    function handleEmailChange(event) {
+        setEmail(event.target.value);
     }
 
-    errorsInForm = () => {
-        return this.state.firstNameError || this.state.lastNameError || this.state.emailError;
-    }
+    function handleSubmit() {
+        let firstNameInvalid = firstName === "";
+        let lastNameInvalid = lastName === "";
+        let emailInvalid = !validateEmail(email);
 
-    handleSubmit = () => {
-        let firstNameInvalid = this.state.firstName === "";
-        let lastNameInvalid = this.state.lastName === "";
-        let emailInvalid = !this.validateEmail(this.state.email);
-
-        this.setState({
-            firstNameError: firstNameInvalid,
-            lastNameError: lastNameInvalid,
-            emailError: emailInvalid
-        });
+        setFirstNameError(firstNameInvalid);
+        setLastNameError(lastNameInvalid);
+        setEmailError(emailInvalid);
 
         if (firstNameInvalid || lastNameInvalid || emailInvalid) {
             console.log("Error Present");
         } else {
             axios.post('http://localhost:5000/add-free', {
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
-                email: this.state.email
+                firstName: firstName,
+                lastName: lastName,
+                email: email
             })
                 .then(res => console.log(res.data)).catch((error) => {
                     console.log(error.response);
                 });
         }
-
     }
 
-    render() {
-        const { classes } = this.props;
-        const nameErrorMessage = "Cannot be empty";
-        const emailErrorMessage = "Must be valid email";
-
-        return (<form className={classes.root} noValidate autoComplete="off">
-            <TextField error={this.state.firstNameError} onChange={this.handleFirstNameChange} helperText={this.state.firstNameError && nameErrorMessage}
-                required id="standard-basic" label="First Name" />
-            <TextField error={this.state.lastNameError} onChange={this.handleLastNameChange} helperText={this.state.lastNameError && nameErrorMessage}
-                required id="standard-basic" label="Last Name" />
-            <TextField error={this.state.emailError} onChange={this.handleEmailChange} helperText={this.state.emailError && emailErrorMessage}
-                required id="standard-basic" label="Email" />
-            <Button onClick={this.handleSubmit} variant="contained">Default</Button>
-        </form>);
-    }
+    return (
+        <div className="free-form-holder">
+            <form className={classes.root} noValidate autoComplete="on">
+                <div >
+                    <TextField error={firstNameError} onChange={handleFirstNameChange} helperText={firstNameError && nameErrorMessage}
+                        required id="firstName" label="First Name" variant="outlined" />
+                </div>
+                <div >
+                    <TextField error={lastNameError} onChange={handleLastNameChange} helperText={lastNameError && nameErrorMessage}
+                        required id="lastName" label="Last Name" variant="outlined" /></div>
+                <div >
+                    <TextField error={emailError} onChange={handleEmailChange} helperText={emailError && emailErrorMessage}
+                        required id="email" label="Email" variant="outlined" />
+                </div>
+                <div >
+                    <Button className={classes.button} onClick={handleSubmit} variant="contained" disableElevation>Download</Button>
+                </div>
+            </form>
+        </div>);
 }
-
-export default withStyles(styles)(FreeDownloadForm);
