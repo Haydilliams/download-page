@@ -3,7 +3,7 @@ import { NavLink, Redirect } from 'react-router-dom';
 import '../App.css';
 import '../App.scss';
 import PaymentForm from "../PaymentForm";
-import UserForm from '../UserForm';
+import FreeDownloadForm from '../FreeDownloadForm'
 
 export default function Download(props) {
 
@@ -43,7 +43,7 @@ export default function Download(props) {
                         <PaymentForm></PaymentForm>
                     </div>
                 </div>
-                <UserForm></UserForm>
+                <FreeDownloadForm></FreeDownloadForm>
             </div>
         );
     } else {

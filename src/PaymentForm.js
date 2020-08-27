@@ -8,7 +8,6 @@ export default function PaymentForm(props) {
     const [isPaying, setIsPaying] = useState(true);
     const [buttonClicked, setButtonClicked] = useState(false);
     const [currentPrice, setCurrentPrice] = useState(5);
-    const test = process.env.REACT_APP_TEST;
 
     function handlePriceChange(event) {
         setCurrentPrice(event.target.value);
