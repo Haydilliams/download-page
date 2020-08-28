@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 import '../App.css';
 import '../App.scss';
-import PaymentForm from "../PaymentForm";
-import FreeDownloadForm from '../FreeDownloadForm'
+import { CSSTransition } from 'react-transition-group';
+import PaypalButtons from '../PaypalButtons'
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+import NumberFormatCustom from '../NumberFormatCustom';
+import FreeDownloadForm from '../FreeDownloadForm';
+
 
 export default function Download(props) {
 
@@ -12,15 +17,30 @@ export default function Download(props) {
 
     function importAll(r) {
         let images = {};
-        r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+        r.keys().forEach((item, index) => { images[item.replace('./', '')] = r(item); });
         return images;
     }
 
-    function callAPITest() {
-        fetch("http://localhost:9000/testAPI")
-        .then(res => res.text())
-        .then(res => alert({ apiResponse: res }));
-    }
+    const [isPaying, setIsPaying] = useState(true);
+    const [currentPrice, setCurrentPrice] = useState(5);
+    const classes = useStyles();
+
+    function handlePriceChange(event) {
+        setCurrentPrice(event.target.value);
+    };
+
+    useEffect(() => {
+        currentPrice === 0 ? setIsPaying(false) : setIsPaying(true);
+    }, [currentPrice]);
+
+    function buttonBehavior() {
+        if (currentPrice === 0) {
+            return 'Download';
+        }
+        else {
+            return 'Pay';
+        }
+    };
 
     const images = importAll(require.context('../images', false, /\.(jpe?g)$/));
     var imageName = props.match.params.imageName
@@ -35,15 +55,49 @@ export default function Download(props) {
                 </div>
                 <div className='download-wrapper'>
                     <div className='download-photo-block'><img src={images[imagePath]} alt={readableImageName} /></div>
-                    <div className='text-and-payment-block'>
-                        <div className='download-text-block'>
+                    <div className='download-text-block'>
+                        <div className="download-text">
                             A High-resolution download of {readableImageName}. Simply pay as little or as
                              much as you want: whatever you feel is right.
-                        </div>
-                        <PaymentForm></PaymentForm>
+                            </div>
+                        <div className="download-text">
+                            Payments are handled securely through Paypal.
+                            </div>
+                        <div className="download-text">
+                            Note, purchasing this image does not grant you any rights to use it commercially.
+                            This image is for personal use only, and may not be used in any commerical or for-profit manner.
+                            </div>
+                        <form className={classes.root} noValidate autoComplete="on">
+                            <TextField
+                                label="Pay what you want"
+                                value={currentPrice}
+                                onChange={handlePriceChange}
+                                name="numberformat"
+                                variant="outlined"
+                                id="formatted-numberformat-input"
+                                InputProps={{ inputComponent: NumberFormatCustom }}
+                            />
+                        </form>
                     </div>
                 </div>
-                <FreeDownloadForm></FreeDownloadForm>
+                <div className="form-animation-holder">
+                    <div className="form-holder">
+                        <CSSTransition unmountOnExit in={isPaying}
+                            timeout={{ enter: 300, exit: 100 }} classNames="my-node">
+                            <div className="paypal-holder">
+                                <PaypalButtons price={currentPrice}></PaypalButtons>
+                            </div>
+                        </CSSTransition>
+                    </div>
+                    <div className="form-holder">
+                        <CSSTransition unmountOnExit in={!isPaying}
+                            timeout={{ enter: 300, exit: 100 }} classNames="my-node">
+                            <div>
+                                <FreeDownloadForm></FreeDownloadForm>
+                            </div>
+                        </CSSTransition>
+                    </div>
+                </div>
             </div>
         );
     } else {
@@ -52,4 +106,13 @@ export default function Download(props) {
         );
     }
 }
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        '& > *': {
+            margin: theme.spacing(1),
+            width: 250
+        },
+    },
+}));
 

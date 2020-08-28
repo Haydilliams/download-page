@@ -104,14 +104,15 @@
 }
 
 .download-wrapper {
-  display: grid;
-  grid-template-columns: 100%;
-  grid-gap: 10px;
-  margin: 40px;
+  display: flex;
+  width: 75%;
+  max-width: 1000px;
+  margin: auto;
+  margin-top: 20px;
 }
 
 .download-photo-block {
-  background-color: brown;
+  margin-right: 10px;
 }
 
 .download-photo-block > img {
@@ -130,9 +131,16 @@
 }
 
 .download-text-block {
-  background-color: red;
-  width: 100%;
-  margin: auto;
+  width: 80%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  margin-left: 10px;
+  border-radius: 5px;
+}
+
+.download-text {
+  text-align: left;
 }
 
 .test-holder {
@@ -140,17 +148,23 @@
   margin: auto;
 }
 
-.paypal-button-container {
-  background-color: blue;
-  left: 0;
-  right: 0;
-  bottom: 0;
+.my-node-enter {
+  opacity: 0;
+  transform: translateY(-50%) scaleY(.1);
 }
-
-.paypal-button-container2 {
-  background-color: rgb(255, 0, 119);
-  left: 0;
-  right: 0;
+.my-node-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.my-node-exit {
+  opacity: 1;
+}
+.my-node-exit-active {
+  opacity: 0;
+  transform-origin: top center;
+  transform: scaleY(.2);
+  transition: opacity 200ms, transform 300ms;
 }
 
 .free-form-holder {
@@ -178,22 +192,40 @@
 }
 
 .payment-form {
+  margin: auto;
+  width: 75%;
+  max-width: 1000px;
+  margin-top : 10px;
+  position: relative;
   display: flex;
   flex-direction: column;
   background-color: green;
 }
 
-.currency-input {
-  width: 70%;
-  border-radius: 6px;
-  border-width: 3px;
-  border-style: solid;
-  font-size: 3vw;
+.form-animation-holder {
+  background-color: pink;
+  width: 100%;
+  margin: auto;
+  position: relative;
 }
 
-.payment-button {
-  display: inline-block;
-  width: 25%;
+.paypal-holder {
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 40%;
+}
+
+.form-holder {
+  background: rgb(188,236,255);
+  background: -moz-linear-gradient(45deg, rgba(188,236,255,1) 0%, rgba(255,208,237,1) 100%);
+  background: -webkit-linear-gradient(45deg, rgba(188,236,255,1) 0%, rgba(255,208,237,1) 100%);
+  background: linear-gradient(45deg, rgba(188,236,255,1) 0%, rgba(255,208,237,1) 100%);
+  margin: auto;
+  margin-top: 20px;
+  left: 0;
+  right: 0;
+  position: absolute;
 }
 
 // Media Screens for the grid on the main page
@@ -232,13 +264,4 @@
 
 // Media Screens for the download page
 
-@media screen and (min-width: 768px) {
-  .paypal-button-container {
-    bottom: 0;
-  }
-  .download-wrapper {
-    grid-template-columns: 40% 60%;
-    padding-top: 40px;
-    margin: 40px;
-  }
-}
+
