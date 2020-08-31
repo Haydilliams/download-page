@@ -11,6 +11,14 @@ const useStyles = makeStyles((theme) => ({
             margin: theme.spacing(1),
             width: 250,
         },
+        '& label.Mui-focused': {
+            color: 'black',
+        },
+        '& .MuiOutlinedInput-root': {
+            '&.Mui-focused fieldset': {
+                borderColor: 'rgb(170, 198, 250)',
+            },
+        }
     },
     button: {
         margin: theme.spacing(1),

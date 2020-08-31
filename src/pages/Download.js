@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 import '../App.css';
 import '../App.scss';
+import Header from '../Header';
 import { CSSTransition } from 'react-transition-group';
 import PaypalButtons from '../PaypalButtons'
 import TextField from '@material-ui/core/TextField';
@@ -30,11 +31,11 @@ export default function Download(props) {
     };
 
     useEffect(() => {
-        currentPrice === 0 ? setIsPaying(false) : setIsPaying(true);
+        currentPrice == 0 ? setIsPaying(false) : setIsPaying(true);
     }, [currentPrice]);
 
     function buttonBehavior() {
-        if (currentPrice === 0) {
+        if (currentPrice == 0) {
             return 'Download';
         }
         else {
@@ -50,9 +51,7 @@ export default function Download(props) {
     if (imagePath in images) {
         return (
             <div className="App">
-                <div className="header">
-                    <NavLink to='/'>{"<--"} Back to All Images</NavLink>
-                </div>
+                <Header navElement={<NavLink to='/'>{"←"} Back to All Images</NavLink>}></Header>
                 <div className='download-wrapper'>
                     <div className='download-photo-block'><img src={images[imagePath]} alt={readableImageName} /></div>
                     <div className='download-text-block'>
@@ -84,17 +83,13 @@ export default function Download(props) {
                     <div className="form-holder">
                         <CSSTransition unmountOnExit in={isPaying}
                             timeout={{ enter: 300, exit: 100 }} classNames="my-node">
-                            <div className="paypal-holder">
-                                <PaypalButtons price={currentPrice}></PaypalButtons>
-                            </div>
+                            <PaypalButtons price={currentPrice}></PaypalButtons>
                         </CSSTransition>
                     </div>
                     <div className="form-holder">
                         <CSSTransition unmountOnExit in={!isPaying}
                             timeout={{ enter: 300, exit: 100 }} classNames="my-node">
-                            <div>
-                                <FreeDownloadForm></FreeDownloadForm>
-                            </div>
+                            <FreeDownloadForm></FreeDownloadForm>
                         </CSSTransition>
                     </div>
                 </div>
@@ -111,8 +106,16 @@ const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
             margin: theme.spacing(1),
-            width: 250
+            width: 250,
         },
+        '& label.Mui-focused': {
+            color: 'black',
+          },
+        '& .MuiOutlinedInput-root': {
+            '&.Mui-focused fieldset': {
+                borderColor: 'rgb(170, 198, 250)',
+            },
+        }
     },
 }));
 

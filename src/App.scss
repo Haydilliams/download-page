@@ -1,9 +1,58 @@
+$header-font-color: rgb(28, 56, 94);
+$top-message-color: rgb(92, 132, 192);
+$gradient: (45deg, rgba(188,236,255,1) 0%, rgba(255,208,237,1) 100%);
+
 .header {
-  display: grid;
-  grid-template-columns: 200px;
-  width: 100%;
+  display: flex;
+  justify-content: space-around;
   height: 10vmin;
-  background-color: #ebc6ee;
+  background-color: #fadcf1;
+}
+
+.header-pad {
+  width: 30%;
+}
+
+.title {
+  margin: auto;
+  font-size: 46px;
+  letter-spacing: 4px;
+  color: $header-font-color;
+  font-family: 'Dosis';
+  font-weight: 300;
+}
+
+
+a:link {
+  text-decoration: none;
+}
+
+a {
+  color: $header-font-color;
+}
+
+.top-message {
+  margin: 70px;
+  font-size: 2rem;
+  font-weight: 300;
+  color: $top-message-color;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  justify-content: space-evenly;
+  height: 25vmin;
+  background: -moz-linear-gradient($gradient);
+  background: -webkit-linear-gradient($gradient);
+  background: linear-gradient($gradient);
+}
+
+.footer > div {
+  font-size: 16px;
+  font-weight: 300;
+  color: rgb(29, 47, 61);
 }
 
 .photo-button-holder {
@@ -54,6 +103,7 @@
   grid-template-columns: repeat(1, auto);
   grid-gap: 30px;
   padding: 20px;
+  padding-top: 0px;
   margin: 30px;
 }
 
@@ -97,6 +147,7 @@
 }
 
 .photo-text {
+  font-weight:300;
   position: absolute;
   top: 100%;
   left: 0;
@@ -105,10 +156,12 @@
 
 .download-wrapper {
   display: flex;
+  flex-direction: column;
   width: 75%;
   max-width: 1000px;
   margin: auto;
-  margin-top: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .download-photo-block {
@@ -121,22 +174,12 @@
   width: 100%;
 }
 
-.text-and-payment-block {
-  background-color: blueviolet;
-  text-align: left;
-  display: grid;
-  height: 100%;
-  grid-template-rows: auto auto auto;
-  grid-gap: 10px;
-}
-
 .download-text-block {
-  width: 80%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-direction: column;
-  margin-left: 10px;
-  border-radius: 5px;
+  margin: auto;
+  margin-top: 20px;
 }
 
 .download-text {
@@ -169,6 +212,8 @@
 
 .free-form-holder {
   margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
   width: 80%;
   display: flex;
   justify-content: center;
@@ -218,14 +263,31 @@
 
 .form-holder {
   background: rgb(188,236,255);
-  background: -moz-linear-gradient(45deg, rgba(188,236,255,1) 0%, rgba(255,208,237,1) 100%);
-  background: -webkit-linear-gradient(45deg, rgba(188,236,255,1) 0%, rgba(255,208,237,1) 100%);
-  background: linear-gradient(45deg, rgba(188,236,255,1) 0%, rgba(255,208,237,1) 100%);
+  background: -moz-linear-gradient($gradient);
+  background: -webkit-linear-gradient($gradient);
+  background: linear-gradient($gradient);
   margin: auto;
-  margin-top: 20px;
   left: 0;
   right: 0;
   position: absolute;
+}
+
+// Header Media Screens
+
+@media screen and (max-width: 580px) {
+  .header {
+    height: 15vmin;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header-pad {
+    width: 0%;
+  }
+
+  .title {
+    font-size: 34px;
+  }
 }
 
 // Media Screens for the grid on the main page
@@ -263,5 +325,23 @@
 }
 
 // Media Screens for the download page
+@media screen and (min-width: 804px) {
+  .download-wrapper {
+    flex-direction: row;
+    
+  }
 
+  .download-text-block {
+    width: 80%;  
+    margin: 0px;
+    margin-left: 20px;
+    justify-content: space-around;
+  }
+}
+
+@media screen and (max-width: 804px) {
+  .paypal-holder {
+    width: 60%;
+  }
+}
 
