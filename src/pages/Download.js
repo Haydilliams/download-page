@@ -63,7 +63,7 @@ export default function Download(props) {
                             Payments are handled securely through Paypal.
                             </div>
                         <div className="download-text">
-                            Note, purchasing this image does not grant you any rights to use it commercially.
+                            Note that purchasing and/or downloading this image does not grant you any rights to use it commercially.
                             This image is for personal use only, and may not be used in any commerical or for-profit manner.
                             </div>
                         <form className={classes.root} noValidate autoComplete="on">
@@ -82,13 +82,13 @@ export default function Download(props) {
                 <div className="form-animation-holder">
                     <div className="form-holder">
                         <CSSTransition unmountOnExit in={isPaying}
-                            timeout={{ enter: 300, exit: 100 }} classNames="my-node">
+                            timeout={{ enter: 300, exit: 100 }} classNames="pay-form">
                             <PaypalButtons price={currentPrice}></PaypalButtons>
                         </CSSTransition>
                     </div>
                     <div className="form-holder">
                         <CSSTransition unmountOnExit in={!isPaying}
-                            timeout={{ enter: 300, exit: 100 }} classNames="my-node">
+                            timeout={{ enter: 300, exit: 100 }} classNames="pay-form">
                             <FreeDownloadForm></FreeDownloadForm>
                         </CSSTransition>
                     </div>
@@ -110,7 +110,7 @@ const useStyles = makeStyles((theme) => ({
         },
         '& label.Mui-focused': {
             color: 'black',
-          },
+        },
         '& .MuiOutlinedInput-root': {
             '&.Mui-focused fieldset': {
                 borderColor: 'rgb(170, 198, 250)',

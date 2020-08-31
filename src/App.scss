@@ -1,11 +1,11 @@
-$header-font-color: rgb(28, 56, 94);
+$header-font-color: rgb(70, 106, 156);
 $top-message-color: rgb(92, 132, 192);
 $gradient: (45deg, rgba(188,236,255,1) 0%, rgba(255,208,237,1) 100%);
 
 .header {
   display: flex;
   justify-content: space-around;
-  height: 10vmin;
+  height: 70px;
   background-color: #fadcf1;
 }
 
@@ -43,7 +43,7 @@ a {
   flex-direction: column;
   margin-top: 100px;
   justify-content: space-evenly;
-  height: 25vmin;
+  height: 150px;
   background: -moz-linear-gradient($gradient);
   background: -webkit-linear-gradient($gradient);
   background: linear-gradient($gradient);
@@ -184,26 +184,22 @@ a {
 
 .download-text {
   text-align: left;
+  font-size: 16px;
 }
 
-.test-holder {
-  width: 30%;
-  margin: auto;
-}
-
-.my-node-enter {
+.pay-form-enter {
   opacity: 0;
   transform: translateY(-50%) scaleY(.1);
 }
-.my-node-enter-active {
+.pay-form-enter-active {
   opacity: 1;
   transform: translateX(0);
   transition: opacity 300ms, transform 300ms;
 }
-.my-node-exit {
+.pay-form-exit {
   opacity: 1;
 }
-.my-node-exit-active {
+.pay-form-exit-active {
   opacity: 0;
   transform-origin: top center;
   transform: scaleY(.2);
