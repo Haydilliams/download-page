@@ -10,7 +10,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import NumberFormatCustom from '../NumberFormatCustom';
 import FreeDownloadForm from '../FreeDownloadForm';
 
-
 export default function Download(props) {
 
     // Rather than importing every single image, this is a nice one compact solution.
@@ -89,7 +88,7 @@ export default function Download(props) {
                     <div className="form-holder">
                         <CSSTransition unmountOnExit in={!isPaying}
                             timeout={{ enter: 300, exit: 100 }} classNames="pay-form">
-                            <FreeDownloadForm></FreeDownloadForm>
+                            <FreeDownloadForm imageNameKey={imageName}></FreeDownloadForm>
                         </CSSTransition>
                     </div>
                 </div>

@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
+import FileSaver from 'file-saver';
 import './App.scss';
 
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function FreeDownloadForm() {
+export default function FreeDownloadForm(props) {
 
     const classes = useStyles();
     const [firstName, setFirstName] = useState('');
@@ -63,6 +64,7 @@ export default function FreeDownloadForm() {
     }
 
     function handleSubmit() {
+
         let firstNameInvalid = firstName === "";
         let lastNameInvalid = lastName === "";
         let emailInvalid = !validateEmail(email);
@@ -72,18 +74,85 @@ export default function FreeDownloadForm() {
         setEmailError(emailInvalid);
 
         if (firstNameInvalid || lastNameInvalid || emailInvalid) {
-            console.log("Error Present");
+            console.log("Error present in form");
         } else {
+
+            // Valid Form, post to DB 
             axios.post('http://localhost:5000/add-free', {
                 firstName: firstName,
                 lastName: lastName,
                 email: email
             })
-                .then(res => console.log(res.data)).catch((error) => {
+                // Store data in DB
+                .then(res => {
+                    console.log('Data added: ', res.data);
+                    // Now begin the download process when DB call is done
+                    return axios.get(`http://localhost:5000/download`, {
+                        params: { imageName: props.imageNameKey }, responseType: 'blob'
+                    })
+                })
+
+                // Catches error in the MongoDB call
+                .catch((error) => { 
                     console.log(error.response);
+                })
+                
+                // Handling the response after the download request begins here
+                .then(response => { 
+                    const blob = new Blob([response.data], { type: "image/jpg" });
+                    console.log('Saving image...');
+                    FileSaver.saveAs(blob, 'image.jpg');
+                })
+                
+                // Catch any errors in retrieving image
+                .catch(err => { 
+                    if (err.response) {
+                        var errorMessage = 'The following error response was received: ';
+                        console.log("The error: ", err);
+                        console.log(errorMessage, err.response);
+                        console.log('Data: ', err.response.data);
+                        console.log('Status: ', err.response.status);
+                    } else if (err.request) {
+                        var errorMessage = 'A request was made, but no response was received: ';
+                        console.log(errorMessage, err.request);
+                    } else {
+                        var errorMessage = 'An unknown error occured: ';
+                        console.log(errorMessage, err.message);
+                    }
                 });
         }
     }
+
+
+    /*
+        function handleDownload(imageNameKey) {
+            console.log(imageNameKey);
+            axios.get(`http://localhost:5000/download`, {
+                params: {
+                    imageName: imageNameKey
+                },
+                responseType: 'blob'
+            }).then(response => {
+                const blob = new Blob([response.data], { type: "image/jpg" });
+                console.log('Saving image...');
+                FileSaver.saveAs(blob, 'image.jpg');
+            }).catch(err => { // set state to display error
+                if (err.response) {
+                    var errorMessage = 'The following error response was received: ';
+                    console.log("The error: ", err);
+                    console.log(errorMessage, err.response);
+                    console.log('Data: ', err.response.data);
+                    console.log('Status: ', err.response.status);
+                } else if (err.request) {
+                    var errorMessage = 'A request was made, but no response was received: ';
+                    console.log(errorMessage, err.request);
+                } else {
+                    var errorMessage = 'An unknown error occured: ';
+                    console.log(errorMessage, err.message);
+                }
+            })
+    
+        */
 
     return (
         <div className="free-form-holder">
