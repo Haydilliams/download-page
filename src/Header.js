@@ -8,6 +8,9 @@ export default function Header(props) {
         <div className="title">
           HAYDEN CLAY
         </div>
+        <div className="title-small">
+          H C W
+        </div>
       </div>
     )
 }

@@ -15,6 +15,7 @@
 #dist
 /src/dist/*
 /backend/dist/*
+/backend/models/dist/*
 
 # misc
 .DS_Store

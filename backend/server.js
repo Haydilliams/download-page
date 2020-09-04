@@ -2,9 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const AWS = require('aws-sdk');
-let FreeDownload = require('./models/freeDownload.js');
-let PaidDownload = require('./models/paidDownload.js');
-
+let Download = require('./models/Download.js');
 
 require('dotenv').config();
 
@@ -24,37 +22,21 @@ connection.once('open', () => {
 
 app.get('/', (req, res) => res.send('Hello'));
 
-app.post('/add-free', (req, res) => {
+app.post('/add-download', (req, res) => {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const email = req.body.email;
     const date = new Date();
+    const paid = req.body.paid;
+    const price = req.body.price;
 
-    const newDownload = new FreeDownload({
+    const newDownload = new Download({
         firstName,
         lastName,
         email,
         date,
-    });
-
-    newDownload.save()
-        .then(() => res.json('New Download added!'))
-        .catch(err => res.status(400).json('Error: ' + err));
-});
-
-app.post('/add-paid', (req, res) => {
-    const firstName = req.body.firstName;
-    const lastName = req.body.lastName;
-    const email = req.body.email;
-    const zip = req.body.zip;
-    const date = new Date();
-
-    const newDownload = new PaidDownload({
-        firstName,
-        lastName,
-        email,
-        zip,
-        date,
+        paid,
+        price
     });
 
     newDownload.save()
@@ -80,11 +62,11 @@ app.get('/download', (req, res) => {
         console.log('Error: ' + error);
         if (error.statusCode) {
             return res.status(error.statusCode).send();
-        } 
-        return res.status(500).send(); // Internal Service Error
+        }
+        return res.status(400).send(); // Internal Service Error
     });
 
-    fileStream.pipe(res); 
+    fileStream.pipe(res);
 });
 
 app.listen(port, () => {

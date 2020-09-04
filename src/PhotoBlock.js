@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import './App.scss';
-import Button from 'react-bootstrap/Button';
 import { NavLink } from 'react-router-dom';
 import Download from './pages/Download.js'
 
 class PhotoBlock extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
 
         // Rather than importing every single image, this is a nice one compact solution.
@@ -17,7 +12,7 @@ class PhotoBlock extends Component {
 
         function importAll(r) {
             let images = {};
-            r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+            r.keys().forEach((item, index) => { images[item.replace('./', '')] = r(item); });
             return images;
         }
 
