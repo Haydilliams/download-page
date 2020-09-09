@@ -1,7 +1,9 @@
-const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
 const AWS = require('aws-sdk');
+const cors = require('cors');
+const express = require('express');
+const helmet = require('helmet');
+const mongoose = require('mongoose');
+const path = require('path');
 let Download = require('./models/Download.js');
 
 require('dotenv').config();
@@ -9,6 +11,7 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 5000;
 
+app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
@@ -20,8 +23,15 @@ connection.once('open', () => {
     console.log("MongoDB database connection established successfully");
 })
 
-app.get('/', (req, res) => res.send('Hello'));
-
+AWS.config.update(
+    {
+        accessKeyId: process.env.ACCESS_KEY_ID,
+        secretAccessKey: process.env.SECRET_ACCESS_KEY
+    }
+);
+  
+app.use(express.static(path.join(__dirname, '../build')));
+  
 app.post('/add-download', (req, res) => {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
@@ -49,12 +59,6 @@ app.get('/download', (req, res) => {
     const imageKey = req.query.imageName + ".jpg";
     console.log('Image key used: ' + imageKey);
 
-    AWS.config.update(
-        {
-            accessKeyId: process.env.ACCESS_KEY_ID,
-            secretAccessKey: process.env.SECRET_ACCESS_KEY
-        }
-    );
     const s3 = new AWS.S3();
     const options = { Bucket: "hayden-clay-downloads", Key: imageKey };
     const fileStream = s3.getObject(options).createReadStream();
@@ -67,6 +71,10 @@ app.get('/download', (req, res) => {
     });
 
     fileStream.pipe(res);
+});  
+
+app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname, '../build/index.html'));
 });
 
 app.listen(port, () => {

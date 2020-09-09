@@ -44,8 +44,6 @@ export default function Download(props) {
     // This useEffect only runs on every re-render, and handles the paying state
     useEffect(() => {
         (currentPrice === '0.00' || currentPrice === '.00') ? setIsPaying(false) : setIsPaying(true);
-        console.log(currentPrice);
-        console.log(currentPrice.toString());
     }, [currentPrice]);
 
     function downloadImage() {
@@ -56,7 +54,6 @@ export default function Download(props) {
             // Handling the response after the download request begins here
             .then(response => {
                 const blob = new Blob([response.data], { type: "image/jpg" });
-                console.log('Saving image...');
                 FileSaver.saveAs(blob, 'image.jpg');
             })
 
@@ -65,7 +62,7 @@ export default function Download(props) {
                 setErrorFound(true);
                 if (err.response) {
                     setErrorMessage("The following error was received: " + err +
-                        " ,with the following status message: " + err.response.statusText
+                        ", with the following status message: " + err.response.statusText
                     );
                 } else if (err.request) {
                     setErrorMessage("A request was made, but no response was received: " + err);
