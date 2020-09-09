@@ -9,9 +9,6 @@ frontend.pnp.js
 # testing
 frontend/coverage
 
-# production
-frontend/build
-
 #dist
 frontend/src/dist/*
 /dist/*

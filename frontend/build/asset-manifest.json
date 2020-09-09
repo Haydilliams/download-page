@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/static/css/main.928b94ec.chunk.css",
+    "main.js": "/static/js/main.4f241bd3.chunk.js",
+    "main.js.map": "/static/js/main.4f241bd3.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.d5772e23.js",
+    "runtime-main.js.map": "/static/js/runtime-main.d5772e23.js.map",
+    "static/js/2.db78193a.chunk.js": "/static/js/2.db78193a.chunk.js",
+    "static/js/2.db78193a.chunk.js.map": "/static/js/2.db78193a.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.0574689b2130f892d2e08181d5f2d117.js": "/precache-manifest.0574689b2130f892d2e08181d5f2d117.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.928b94ec.chunk.css.map": "/static/css/main.928b94ec.chunk.css.map",
+    "static/js/2.db78193a.chunk.js.LICENSE.txt": "/static/js/2.db78193a.chunk.js.LICENSE.txt",
+    "static/media/Bathing_Culture500.jpg": "/static/media/Bathing_Culture500.7af01a39.jpg",
+    "static/media/Big_City_Pipe_Dream500.jpg": "/static/media/Big_City_Pipe_Dream500.050b2b3b.jpg",
+    "static/media/Deep_Dreamliner500.jpg": "/static/media/Deep_Dreamliner500.d5382045.jpg",
+    "static/media/Dive-in_Theatre500.jpg": "/static/media/Dive-in_Theatre500.25b58cc6.jpg",
+    "static/media/Drink_And_Dream500.jpg": "/static/media/Drink_And_Dream500.392e6469.jpg",
+    "static/media/Late_Night_Pipe_Dream500.jpg": "/static/media/Late_Night_Pipe_Dream500.1abe7af7.jpg",
+    "static/media/Sign_of_The_Times500.jpg": "/static/media/Sign_of_The_Times500.dd7ec8df.jpg",
+    "static/media/Sleep_Street_Station500.jpg": "/static/media/Sleep_Street_Station500.fc7d9bf9.jpg",
+    "static/media/Suburban_Shore500.jpg": "/static/media/Suburban_Shore500.3640f8ec.jpg",
+    "static/media/Summer_Games500.jpg": "/static/media/Summer_Games500.e511e50e.jpg",
+    "static/media/Sunset_Pipe_Dream500.jpg": "/static/media/Sunset_Pipe_Dream500.ed943ed3.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d5772e23.js",
+    "static/js/2.db78193a.chunk.js",
+    "static/css/main.928b94ec.chunk.css",
+    "static/js/main.4f241bd3.chunk.js"
+  ]
+}
