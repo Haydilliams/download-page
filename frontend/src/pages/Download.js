@@ -48,7 +48,7 @@ export default function Download(props) {
 
     function downloadImage() {
         setFinishedPaying(true);
-        axios.get(`http://localhost:5000/download`, {
+        axios.get(`http://localhost:8081/download`, {
             params: { imageName: imageName }, responseType: 'blob'
         })
             // Handling the response after the download request begins here

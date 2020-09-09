@@ -20,7 +20,7 @@ export default function PaypalButtons(props) {
                 onSuccess={(details, data) => {
 
                     //Call server to save the transaction
-                    axios.post('http://localhost:5000/add-download', {
+                    axios.post('http://localhost:8081/add-download', {
                         firstName: details.payer.name.given_name,
                         lastName: details.payer.name.surname,
                         email: details.payer.email_address,
