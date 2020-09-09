@@ -17,6 +17,11 @@
 /backend/dist/*
 /backend/models/dist/*
 
+# Elastic Beanstalk Files
+/backend/.elasticbeanstalk/*
+!/backend/.elasticbeanstalk/*.cfg.yml
+!/backend/.elasticbeanstalk/*.global.yml
+
 # misc
 .DS_Store
 .env
