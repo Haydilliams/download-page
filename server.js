@@ -30,7 +30,7 @@ AWS.config.update(
     }
 );
 
-app.use(express.static(path.join(__dirname, '../build')));
+app.use(express.static(path.join(__dirname, 'frontend/build')));
 
 app.post('/add-download', (req, res) => {
     const firstName = req.body.firstName;
@@ -74,7 +74,7 @@ app.get('/download', (req, res) => {
 });
 
 app.get('/*', function (req, res) {
-    res.sendFile(path.join(__dirname, '../build/index.html'));
+    res.sendFile(path.join(__dirname, 'frontend/build/index.html'));
 });
 
 app.listen(port, () => {
