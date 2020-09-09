@@ -9,7 +9,7 @@ let Download = require('./models/Download.js');
 require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8081;
 
 app.use(helmet());
 app.use(cors());
@@ -29,9 +29,9 @@ AWS.config.update(
         secretAccessKey: process.env.SECRET_ACCESS_KEY
     }
 );
-  
+
 app.use(express.static(path.join(__dirname, '../build')));
-  
+
 app.post('/add-download', (req, res) => {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
@@ -71,9 +71,9 @@ app.get('/download', (req, res) => {
     });
 
     fileStream.pipe(res);
-});  
+});
 
-app.get('/*', function(req, res) {
+app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, '../build/index.html'));
 });
 
