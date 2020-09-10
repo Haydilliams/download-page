@@ -187,6 +187,7 @@ a {
   flex-direction: column;
   margin: auto;
   margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .download-text {
@@ -197,6 +198,7 @@ a {
 }
 
 .price-holder {
+  margin-top: 16px;
   margin-left: auto;
   margin-right: auto;
   width: 250px;
@@ -329,6 +331,12 @@ a {
 }
 
 @media screen and (max-width: 460px) {
+  .top-message {
+    font-size: 1.5rem;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
   .title {
     display: none;
   }
@@ -381,6 +389,10 @@ a {
 }
 
 @media screen and (min-width: 680px) {
+  .price-holder {
+    margin-top: 0px;
+  }
+
   .download-wrapper {
     flex-direction: row;
   }
