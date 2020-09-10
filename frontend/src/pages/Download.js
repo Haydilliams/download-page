@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import NumberFormatCustom from '../NumberFormatCustom';
 import FreeDownloadForm from '../FreeDownloadForm';
 import Confirmation from '../Confirmation'
+require('dotenv').config();
 
 export default function Download(props) {
 
@@ -21,6 +22,14 @@ export default function Download(props) {
     const [errorFound, setErrorFound] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const classes = useStyles();
+
+    const url = (() => {
+        if (process.env.NODE_ENV === "production") {
+            return "http://download-page-env.eba-wafpx7je.us-east-1.elasticbeanstalk.com";
+        } else {
+            return "http://localhost:8081";
+        }
+    })();
 
     // Rather than importing every single image, this is a nice one compact solution.
     // kudos to: https://stackoverflow.com/questions/42118296/dynamically-import-images-from-a-directory-using-webpack
@@ -48,7 +57,7 @@ export default function Download(props) {
 
     function downloadImage() {
         setFinishedPaying(true);
-        axios.get(`http://localhost:8081/download`, {
+        axios.get(url + "/download", {
             params: { imageName: imageName }, responseType: 'blob'
         })
             // Handling the response after the download request begins here
@@ -110,13 +119,13 @@ export default function Download(props) {
                     <div className="form-holder">
                         <CSSTransition unmountOnExit in={isPaying && !finishedPaying && !errorFound}
                             timeout={{ enter: 300, exit: 100 }} classNames="pay-form">
-                            <PaypalButtons downloadHandler={downloadImage} price={currentPrice}></PaypalButtons>
+                            <PaypalButtons urlString={url} downloadHandler={downloadImage} price={currentPrice}></PaypalButtons>
                         </CSSTransition>
                     </div>
                     <div className="positioning-form-holder">
                         <CSSTransition unmountOnExit in={!isPaying && !finishedPaying && !errorFound}
                             timeout={{ enter: 300, exit: 100 }} classNames="pay-form">
-                            <FreeDownloadForm downloadHandler={downloadImage}></FreeDownloadForm>
+                            <FreeDownloadForm urlString={url} downloadHandler={downloadImage}></FreeDownloadForm>
                         </CSSTransition>
                     </div>
                     <CSSTransition unmountOnExit in={finishedPaying && !errorFound}

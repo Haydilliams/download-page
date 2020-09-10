@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import './App.scss';
+require('dotenv').config();
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -76,7 +77,7 @@ export default function FreeDownloadForm(props) {
             console.log("Error present in form");
         } else {
             // Valid Form, post to DB 
-            axios.post('http://localhost:8081/add-download', {
+            axios.post(props.urlString + '/add-download', {
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
