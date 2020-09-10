@@ -6,7 +6,6 @@ require('dotenv').config();
 export default function PaypalButtons(props) {
 
     const clientId = process.env.REACT_APP_CLIENT_ID;
-    console.log(process.env.NODE_ENV);
 
     return (
         <div className="paypal-holder">

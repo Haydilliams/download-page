@@ -25,8 +25,7 @@ export default function Download(props) {
 
     const url = (() => {
         if (process.env.NODE_ENV === "production") {
-            // TODO: Get a cleaner URL
-            return "https://download-page-env.eba-wafpx7je.us-east-1.elasticbeanstalk.com";
+            return "https://haydenclay.page";
         } else {
             return "http://localhost:8081";
         }
