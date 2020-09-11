@@ -5,7 +5,13 @@ require('dotenv').config();
 
 export default function PaypalButtons(props) {
 
-    const clientId = process.env.REACT_APP_CLIENT_ID;
+    const clientId = (() => {
+        if (process.env.NODE_ENV === "production") {
+            return process.env.REACT_APP_LIVE_CLIENT_ID;
+        } else {
+            return process.env.REACT_APP_SANDBOX_CLIENT_ID;
+        }
+    })();
 
     return (
         <div className="paypal-holder">
@@ -28,7 +34,6 @@ export default function PaypalButtons(props) {
                     })
                         // Store data in DB
                         .then(res => {
-                            console.log('Data added: ', res.data);
                             // Now begin the download process when DB call is done
                             return props.downloadHandler();
                         })
@@ -39,10 +44,10 @@ export default function PaypalButtons(props) {
                         })
                 }}
                 catchError={(err) => {
-                    console.log("Catch error caught");
+                    console.log("Catch error caught: ", err);
                 }}
                 onError={(err) => {
-                    console.log("On error caught");
+                    console.log("On error caught", err);
                 }}
             />
         </div>
