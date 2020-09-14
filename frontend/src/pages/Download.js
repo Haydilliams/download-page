@@ -119,13 +119,13 @@ export default function Download(props) {
                     <div className="form-holder">
                         <CSSTransition unmountOnExit in={isPaying && !finishedPaying && !errorFound}
                             timeout={{ enter: 300, exit: 100 }} classNames="pay-form">
-                            <PaypalButtons urlString={url} downloadHandler={downloadImage} price={currentPrice}></PaypalButtons>
+                            <PaypalButtons imageName={imageName} urlString={url} downloadHandler={downloadImage} price={currentPrice}></PaypalButtons>
                         </CSSTransition>
                     </div>
                     <div className="positioning-form-holder">
                         <CSSTransition unmountOnExit in={!isPaying && !finishedPaying && !errorFound}
                             timeout={{ enter: 300, exit: 100 }} classNames="pay-form">
-                            <FreeDownloadForm urlString={url} downloadHandler={downloadImage}></FreeDownloadForm>
+                            <FreeDownloadForm imageName={imageName} urlString={url} downloadHandler={downloadImage}></FreeDownloadForm>
                         </CSSTransition>
                     </div>
                     <CSSTransition unmountOnExit in={finishedPaying && !errorFound}

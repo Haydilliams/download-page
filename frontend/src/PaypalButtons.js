@@ -36,6 +36,7 @@ export default function PaypalButtons(props) {
 
                         //Call server to save the transaction
                         axios.post(props.urlString + "/add-download", {
+                            imageDownloaded: props.imageName,
                             firstName: details.payer.name.given_name,
                             lastName: details.payer.name.surname,
                             email: details.payer.email_address,

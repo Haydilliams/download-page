@@ -74,10 +74,10 @@ export default function FreeDownloadForm(props) {
         setEmailError(emailInvalid);
 
         if (firstNameInvalid || lastNameInvalid || emailInvalid) {
-            console.log("Error present in form");
         } else {
             // Valid Form, post to DB 
             axios.post(props.urlString + '/add-download', {
+                imageDownloaded: props.imageName,
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
@@ -86,7 +86,6 @@ export default function FreeDownloadForm(props) {
             })
                 // Store data in DB
                 .then(res => {
-                    console.log('Data added: ', res.data);
                     // Now begin the download process when DB call is done
                     return props.downloadHandler();
                 })

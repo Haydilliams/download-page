@@ -41,6 +41,7 @@ AWS.config.update(
 app.use(express.static(path.join(__dirname, 'frontend/build')));
 
 app.post('/add-download', (req, res) => {
+    const imageDownloaded = req.body.imageDownloaded;
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const email = req.body.email;
@@ -49,6 +50,7 @@ app.post('/add-download', (req, res) => {
     const price = req.body.price;
 
     const newDownload = new Download({
+        imageDownloaded,
         firstName,
         lastName,
         email,
