@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <Header navElement={<a href="https://www.haydenclay.com">{"←"} Back to Website</a>}></Header>
-      <div className="top-message">High quality downloads at whatever price you want.</div>
+      <div className="top-message">High quality wallpapers at whatever price you want.</div>
       <div className='wrapper'>
         <PhotoBlock imageName='Drink_And_Dream' />
         <PhotoBlock imageName='Sunset_Pipe_Dream' />

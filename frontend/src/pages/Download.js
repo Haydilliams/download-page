@@ -89,7 +89,7 @@ export default function Download(props) {
                     <div className='download-photo-block'><img src={images[imagePath]} alt={readableImageName} /></div>
                     <div className='download-text-block'>
                         <div className="download-text">
-                            A High-resolution download of {readableImageName}. Simply pay as little or as
+                            A High-resolution download of {readableImageName} for use as a digital wallpaper. Simply pay as little or as
                              much as you want: whatever you feel is right.
                             </div>
                         <div className="download-text">
