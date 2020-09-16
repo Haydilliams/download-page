@@ -3,8 +3,12 @@ import './App.css';
 import './App.scss';
 import PhotoBlock from './PhotoBlock';
 import Header from './Header';
+import ReactGA from 'react-ga';
 
 function App() {
+  ReactGA.initialize('UA-177846132-1');
+  ReactGA.pageview(window.location.pathname + window.location.search);
+  
   return (
     <div className="App">
       <Header navElement={<a href="https://www.haydenclay.com">{"←"} Back to Website</a>}></Header>
