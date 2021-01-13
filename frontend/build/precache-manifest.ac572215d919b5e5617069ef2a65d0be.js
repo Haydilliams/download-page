@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4ee1710ba29fb5b2129aad138a0b12c4",
+    "revision": "7f5bb06fd49a49684719f625cb65a8cb",
     "url": "/index.html"
   },
   {
-    "revision": "8ce3d506354a7ec2b469",
+    "revision": "6f6d9c774784dd783a83",
     "url": "/static/css/main.727bbeb1.chunk.css"
   },
   {
-    "revision": "8098a650a1d08a0ae654",
-    "url": "/static/js/2.5a200c6f.chunk.js"
+    "revision": "badaa3b77367bdb79a4c",
+    "url": "/static/js/2.0211ded6.chunk.js"
   },
   {
     "revision": "0749163b59fbee32225059cb60c18af6",
-    "url": "/static/js/2.5a200c6f.chunk.js.LICENSE.txt"
+    "url": "/static/js/2.0211ded6.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "8ce3d506354a7ec2b469",
-    "url": "/static/js/main.cca7d7e0.chunk.js"
+    "revision": "6f6d9c774784dd783a83",
+    "url": "/static/js/main.8ac90965.chunk.js"
   },
   {
     "revision": "dcbd6308bfa1ef243a46",
@@ -66,5 +66,9 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "ed943ed34144ddc326b236066e5b8b21",
     "url": "/static/media/Sunset_Pipe_Dream500.ed943ed3.jpg"
+  },
+  {
+    "revision": "f9896a36a00c0985c38df27e32438c8e",
+    "url": "/static/media/Turn_of_The_Century500.f9896a36.jpg"
   }
 ]);

@@ -8,13 +8,14 @@ import ReactGA from 'react-ga';
 function App() {
   ReactGA.initialize('UA-177846132-1');
   ReactGA.pageview(window.location.pathname + window.location.search);
-  
+
   return (
     <div className="App">
       <Header navElement={<a href="https://www.haydenclay.com">{"←"} Back to Website</a>}></Header>
       <div className="top-message">High quality wallpapers at whatever price you want.</div>
       <div className='wrapper'>
         <PhotoBlock imageName='Drink_And_Dream' />
+        <PhotoBlock imageName='Turn_of_The_Century' />
         <PhotoBlock imageName='Sunset_Pipe_Dream' />
         <PhotoBlock imageName='Bathing_Culture' />
         <PhotoBlock imageName='Big_City_Pipe_Dream' />

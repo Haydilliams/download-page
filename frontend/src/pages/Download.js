@@ -40,6 +40,7 @@ export default function Download(props) {
     }
     const images = importAll(require.context('../images', false, /\.(jpe?g)$/));
     var imageName = props.match.params.imageName
+    var fileName = imageName + ".jpg"
     var imagePath = imageName + "500.jpg";
     var readableImageName = imageName.replace(/_/g, " ");
 
@@ -63,7 +64,7 @@ export default function Download(props) {
             // Handling the response after the download request begins here
             .then(response => {
                 const blob = new Blob([response.data], { type: "image/jpg" });
-                FileSaver.saveAs(blob, 'image.jpg');
+                FileSaver.saveAs(blob, fileName);
             })
 
             // Catch any errors in retrieving image
